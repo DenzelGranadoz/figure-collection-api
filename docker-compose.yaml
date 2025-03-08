@@ -34,6 +34,8 @@ services:
       DB_LOGGING: true
     networks:
       - figure-collection-network
+    volumes:
+      - .:/usr/src/app
 
 networks:
   figure-collection-network:
