@@ -50,7 +50,7 @@ Feel free to reach out if you have any questions or issues while testing the API
 
 - To implement this, I opted with creating an Auth module and a Users module along with the jwtservice library. Auth module for authenticating and users module to help with validating data from the db. Auth guard to protect routes.
 - When user requests to login, authentication happens once user has been validated. I opted to simply return the id and username for verification when testing the endpoint but this can be used to display logged in user data in the frontend.
-- When validating the password, I used bcrypt to hash and compare
+- When validating the password, I used bcrypt to compare the entered password with the stored hashed password.
 - Once user has been validated, we generate access token using JWT and return that along with the username and id.
 - The access token can then be used/validated when making requests within protected routes
 - In order to control routes, I added an auth guard extract access token and use jwt service to verify the token
