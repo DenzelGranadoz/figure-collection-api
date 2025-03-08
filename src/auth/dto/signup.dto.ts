@@ -1,14 +1,16 @@
 import { IsString, MinLength, Matches } from 'class-validator';
 
-export class SignupDto {
+const passwordRegEx = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+
+export class SignUpDto {
   @IsString()
   username: string;
 
   @IsString()
-  @MinLength(8)
-  @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
+  @MinLength(8, { message: 'Password must be at least 8 characters long' })
+  @Matches(passwordRegEx, {
     message:
-      'password must contain uppercase, lowercase, number and special character',
+      'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character',
   })
   password: string;
 }

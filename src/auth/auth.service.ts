@@ -1,17 +1,13 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from 'src/users/users.service';
-import { SignupDto } from './dto/signup.dto';
-import { Users } from 'src/users/users.entity';
+import { SignUpDto } from './dto/signup.dto';
+import { SignInDto } from './dto/signin.dto';
+import { Users } from 'src/users/entities/users.entity';
 
 type AuthInput = {
   username: string;
   password: string;
-};
-
-type SignInData = {
-  id: number;
-  username: string;
 };
 
 type AuthResult = {
@@ -37,7 +33,7 @@ export class AuthService {
     return this.signIn(user);
   }
 
-  async validateUser(input: AuthInput): Promise<SignInData | null> {
+  async validateUser(input: AuthInput): Promise<SignInDto | null> {
     const user = await this.userService.findUserByName(input.username);
 
     if (user && (await user.validatePassword(input.password))) {
@@ -50,7 +46,7 @@ export class AuthService {
     return null;
   }
 
-  async signIn(user: SignInData): Promise<AuthResult> {
+  async signIn(user: SignInDto): Promise<AuthResult> {
     const tokenPayload = {
       sub: user.id,
       username: user.username,
@@ -60,7 +56,7 @@ export class AuthService {
     return { accessToken, username: user.username, id: user.id };
   }
 
-  async signUp(user: SignupDto): Promise<Users> {
+  async signUp(user: SignUpDto): Promise<Users> {
     return this.userService.create(user);
   }
 }
