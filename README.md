@@ -16,9 +16,11 @@ To get this project up and running locally, follow the steps below:
 2. Change directory into the cloned repository:
    `cd figure-collection-api`
 
-3. Download Docker
+3. Copy the `.env.example` file to `.env` and fill the corresponding fields. db has to match docker
 
-4. Open a terminal inside the project directory and run:
+4. Download Docker
+
+5. Open a terminal inside the project directory and run:
    `docker-compose up --build
 `
 
