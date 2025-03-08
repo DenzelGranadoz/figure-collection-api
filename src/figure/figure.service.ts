@@ -61,7 +61,7 @@ export class FigureService {
     const figure: Figure = new Figure();
     figure.name = updateFigureDto.name;
     figure.price = updateFigureDto.price;
-    figure.imageUrl = updateFigureDto.imageUrl;
+    figure.imageUrl = updateFigureDto.imageUrl || '';
     figure.id = id;
     return await this.figureRepository.save(figure);
   }

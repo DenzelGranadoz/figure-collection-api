@@ -1,4 +1,4 @@
-import { IsDecimal, IsNotEmpty, IsString } from 'class-validator';
+import { IsDecimal, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class UpdateFigureDto {
   @IsString()
@@ -9,7 +9,7 @@ export class UpdateFigureDto {
   @IsNotEmpty()
   price: number;
 
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
-  imageUrl: string;
+  imageUrl?: string;
 }
