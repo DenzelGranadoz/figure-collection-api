@@ -8,25 +8,29 @@ import { Figure } from './entities/figure.entity';
 import { Repository } from 'typeorm';
 import { CreateFigureDto } from './dto/create-figure.dto';
 import { UpdateFigureDto } from './dto/update-figure.dto';
+import { UploadService } from 'src/upload/upload.service';
 
 @Injectable()
 export class FigureService {
   constructor(
     @InjectRepository(Figure) private figureRepository: Repository<Figure>,
+    private readonly uploadService: UploadService,
   ) {}
 
-  async createFigure(createFigureDto: CreateFigureDto): Promise<Figure> {
-    if (
-      !createFigureDto.name ||
-      !createFigureDto.price ||
-      !createFigureDto.imageUrl
-    ) {
+  async createFigure(
+    createFigureDto: CreateFigureDto,
+    file?: Express.Multer.File,
+  ): Promise<Figure> {
+    if (!createFigureDto.name || !createFigureDto.price) {
       throw new BadRequestException('All fields are required');
     }
+
+    const imageUrl = file ? await this.uploadService.uploadFile(file) : '';
+
     const figure: Figure = new Figure();
     figure.name = createFigureDto.name;
     figure.price = createFigureDto.price;
-    figure.imageUrl = createFigureDto.imageUrl;
+    figure.imageUrl = imageUrl;
 
     return await this.figureRepository.save(figure);
   }

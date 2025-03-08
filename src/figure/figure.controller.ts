@@ -7,12 +7,15 @@ import {
   Patch,
   Post,
   Query,
+  UploadedFile,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { FigureService } from './figure.service';
 import { CreateFigureDto } from './dto/create-figure.dto';
 import { UpdateFigureDto } from './dto/update-figure.dto';
 import { AuthGuard } from 'src/auth/guards/auth.guard';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('figure')
 export class FigureController {
@@ -20,8 +23,12 @@ export class FigureController {
 
   @Post()
   @UseGuards(AuthGuard)
-  create(@Body() createFigureDto: CreateFigureDto) {
-    return this.figureService.createFigure(createFigureDto);
+  @UseInterceptors(FileInterceptor('file'))
+  create(
+    @Body() createFigureDto: CreateFigureDto,
+    @UploadedFile() file: Express.Multer.File,
+  ) {
+    return this.figureService.createFigure(createFigureDto, file);
   }
 
   @Get()

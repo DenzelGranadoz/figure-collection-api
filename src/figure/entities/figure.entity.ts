@@ -11,6 +11,6 @@ export class Figure {
   @Column('decimal')
   price: number;
 
-  @Column()
-  imageUrl: string;
+  @Column({ type: 'text', nullable: true })
+  imageUrl: string | null;
 }
