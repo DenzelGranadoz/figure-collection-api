@@ -45,8 +45,13 @@ export class FigureController {
 
   @Patch(':id')
   @UseGuards(AuthGuard)
-  update(@Param('id') id: number, @Body() updateFigureDto: UpdateFigureDto) {
-    return this.figureService.updateFigure(+id, updateFigureDto);
+  @UseInterceptors(FileInterceptor('file'))
+  update(
+    @Param('id') id: number,
+    @Body() updateFigureDto: UpdateFigureDto,
+    @UploadedFile() file: Express.Multer.File,
+  ) {
+    return this.figureService.updateFigure(+id, updateFigureDto, file);
   }
 
   @Delete(':id')

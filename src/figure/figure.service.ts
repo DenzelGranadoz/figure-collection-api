@@ -57,12 +57,17 @@ export class FigureService {
   async updateFigure(
     id: number,
     updateFigureDto: UpdateFigureDto,
+    file?: Express.Multer.File,
   ): Promise<Figure> {
-    const figure: Figure = new Figure();
+    const figure = await this.figureRepository.findOneBy({ id });
+    if (!figure) throw new NotFoundException(`Figure with ID ${id} not found`);
+
     figure.name = updateFigureDto.name;
     figure.price = updateFigureDto.price;
-    figure.imageUrl = updateFigureDto.imageUrl || '';
-    figure.id = id;
+    figure.imageUrl = file
+      ? await this.uploadService.uploadFile(file)
+      : figure.imageUrl;
+
     return await this.figureRepository.save(figure);
   }
 
