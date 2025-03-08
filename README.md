@@ -1,98 +1,80 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Backend Developer Assignment
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Objective
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+#### Demonstrate your ability to build and manage a scalable backend using Nest.js, PostgreSQL, and AWS S3.
 
-## Description
+# Figure Collection API
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Getting Started
 
-## Project setup
+To get this project up and running locally, follow the steps below:
 
-```bash
-$ npm install
-```
+1. Clone repository:
+   `git clone https://github.com/DenzelGranadoz/figure-collection-api.git`
 
-## Compile and run the project
+2. Change directory into the cloned repository:
+   `cd figure-collection-api`
 
-```bash
-# development
-$ npm run start
+3. Download Docker
 
-# watch mode
-$ npm run start:dev
+4. Open a terminal inside the project directory and run:
+   `docker-compose up --build
+`
 
-# production mode
-$ npm run start:prod
-```
+This will run the database and the nestjs application in your local machine
 
-## Run tests
+## Testing Endpoints with Postman
 
-```bash
-# unit tests
-$ npm run test
+You can use the provided Postman collection to test the API endpoints locally.
 
-# e2e tests
-$ npm run test:e2e
+### Steps to import the collection:
 
-# test coverage
-$ npm run test:cov
-```
+1. Download the Postman collection file:
 
-## Deployment
+   - [Download Postman Collection](https://github.com/DenzelGranadoz/figure-collection-api/blob/main/postman/figure-collection-api.postman_collection.json)
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+2. Open Postman and click on **Import** in the top-left corner.
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+3. Select the downloaded `.json` file or paste the shared link in the **Link** tab.
 
-```bash
-$ npm install -g mau
-$ mau deploy
-```
+4. Once imported, you can use the Postman collection to test the API.
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+\*\*\*Make sure to run the database and the nestjs application in your local machine
 
-## Resources
+Feel free to reach out if you have any questions or issues while testing the API.
 
-Check out a few resources that may come in handy when working with NestJS:
+# Design decisions and approach
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+### Authentication flow
 
-## Support
+- To implement this, I opted with creating an Auth module and a Users module along with the jwtservice library. Auth module for authenticating and users module to help with validating data from the db. Auth guard to protect routes.
+- When user requests to login, authentication happens once user has been validated. I opted to simply return the id and username for verification when testing the endpoint but this can be used to display logged in user data in the frontend.
+- When validating the password, I used bcrypt to hash and compare
+- Once user has been validated, we generate access token using JWT and return that along with the username and id.
+- The access token can then be used/validated when making requests within protected routes
+- In order to control routes, I added an auth guard extract access token and use jwt service to verify the token
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+### Figure CRUD endpoints
 
-## Stay in touch
+- Most of Figure related features was handled within the Figure module. An upload module was needed in order to accomodate the implementation of uploading a file with AWS S3
+- I opted to add the auth guard for each endpoint, to simulate a user logged in making requests
+- For the pagination of Get all figures, I used Page and limit queries to easily filter data
+- uploading was separated into another module just to keep separation of concerns since business logic was handled within the figure module
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### Others
 
-## License
+- Separation of Concerns: By using DI, we ensure that a service can be injected to have a modular and maintainable code. This would also make testing easier
+- Most of the input validation was handled by the DTOs
+- Whenever possible, I attempted to add error handling within each service.
+- Meaningful exceptions and http status code
+- I opted with using IDs for both Users and Figures table for scalability and handling data when implementing pagination
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+## Future considerations
+
+- Relationship of the Users and Figures table, a one to many and many to one since a User can own many Figures but a figure has to be tied up to one User
+- Look into kubernetes when deploying to Prod
+- Role based authorization instead of just limiting protecting routes in a logged in setting
+- Look into logging, when the app scales, it would make debugging easier
+- Writing Tests, to ensure maintainability. I also left test files for future implementation
+- Caching, when the app and data scales,it would be good to speed up retrieval of records
