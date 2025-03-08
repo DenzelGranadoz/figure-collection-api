@@ -1,0 +1,290 @@
+{
+	"info": {
+		"_postman_id": "2018b994-92e5-40f1-9461-1f694bf99b0f",
+		"name": "figure-collection-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25940485"
+	},
+	"item": [
+		{
+			"name": "CRUD",
+			"item": [
+				{
+					"name": "Create Figure",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoidGVzdGRvY2tlcjIyIiwiaWF0IjoxNzQxNDQ1MzM3LCJleHAiOjE3NDE1MzE3Mzd9.-lQMfJ9oQpomJ_Obmu0nVgKvZ4W-DydYqh4lHIQdBoU",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Test add figure",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "22.22",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/Users/Denz/Documents/image 12.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/figure",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"figure"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Figure By ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEzLCJ1c2VybmFtZSI6InRlc3QiLCJpYXQiOjE3NDE0MzcyODgsImV4cCI6MTc0MTUyMzY4OH0.m2LKhBQgWCVU28J9sAVVGfbUDPecH3ok7vB_Npw42hg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/figure/13",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"figure",
+								"13"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Figures",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoidGVzdGRvY2tlciIsImlhdCI6MTc0MTQ0MDQyNSwiZXhwIjoxNzQxNTI2ODI1fQ.2RHWoae5TkylHfWU9kYHwAhSsJKLRdQOZrM86cy-dqA",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/figure?page=1&limit=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"figure"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Figure",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiZGVuemVsIiwiaWF0IjoxNzQxNDI2ODk5LCJleHAiOjE3NDE1MTMyOTl9.04ZxSxFHaadfogUN4d1WwW9cRkO5MJqtFLO2q_Pn9z4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "test update",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "420",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/Users/Denz/Documents/image 12.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/figure/13",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"figure",
+								"13"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Figure",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiZGVuemVsIiwiaWF0IjoxNzQxNDI2ODk5LCJleHAiOjE3NDE1MTMyOTl9.04ZxSxFHaadfogUN4d1WwW9cRkO5MJqtFLO2q_Pn9z4",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/figure/14",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"figure",
+								"14"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AUTH",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"testdocker22\",\n    \"password\": \"123jE1222fdafasd!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login - passportjs implem",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"testuser\",\n    \"password\": \"123Secret!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth-v2/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth-v2",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"testdocker22\",\n    \"password\": \"123jE1222fdafasd!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
